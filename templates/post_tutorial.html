@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for t in tutorial %}
+    <!-- {% for t in tutorial %}
         <article class="media content-section text-center">
-          <!-- <img class="rounded-circle article-img" src=""> -->
+          <img class="rounded-circle article-img" src=""> 
           <div class="media-body post-img">
             <div class="article-metadata">
               <a class="mr-2" href="{% url 'tutorial-detail' t.id %}">{{ t.title }}</a>
@@ -13,5 +13,24 @@
             <p class="article-content">{{ t.description }}</p>
           </div>
         </article>
-    {% endfor %}
+    {% endfor %} -->
+    {% for t in tutorial %}
+    <div class="container">
+      <div class="row">
+          <!-- Blog entries-->
+          <div class="col-lg-12">
+              <!-- Featured blog post-->
+              <div class="card mb-4">
+                  <a href="#!"><img class="card-img-top" src="{{ t.image.url  }}" alt="..." /></a>
+                  <div class="card-body">
+                      <div class="small text-muted">January 1, 2022</div>
+                      <h2 class="card-title">Featured Post Title</h2>
+                      <p class="card-text">{{ t.description }}</p>
+                      <a class="btn btn-primary" href="{% url 'tutorial-detail' t.id %}">Read more</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+              {% endfor %}
 {% endblock content %}
