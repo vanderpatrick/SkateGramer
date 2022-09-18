@@ -9,10 +9,12 @@ from django.contrib import messages
 
 # All views used in the app
 
+# View to render landing page for new users
 def landing(request):
     return render(request, 'landing.html')
 
 
+# displays list of all posts in the app 
 class PostListView(ListView):
     model = Post
     template_name = 'index.html'
@@ -20,6 +22,7 @@ class PostListView(ListView):
     ordering = ['-created_on']
 
 
+# Creates a new post in the app if user is True
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_create.html'
@@ -30,12 +33,14 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+# Displays post details 
 class PostDetailView(DetailView):
     model = Post
     context_object_name = 'detail'
     template_name = 'post_detail.html'
 
 
+# Allow user to update his post if user = True
 class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post_update.html'
@@ -53,8 +58,21 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         else:
             return False
 
+# Displays tutorials post made by admin (only)
 class PostTutorialListView(ListView):
     model = PostTutorial
     template_name = 'post_tutorial.html'
     context_object_name = 'tutorial'
     ordering = ['-created_on']
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post 
+    success_url = '/home'
+    template_name = 'post_confirm_delete.html'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
