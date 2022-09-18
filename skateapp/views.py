@@ -20,9 +20,20 @@ class PostListView(ListView):
     ordering = ['-created_on']
 
 
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'post_create.html'
+    context_object_name = 'create'
+    fields = ['title', 'image', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+
 class PostTutorialListView(ListView):
     model = PostTutorial
     template_name = 'post_tutorial.html'
     context_object_name = 'tutorial'
     ordering = ['-created_on']
-    

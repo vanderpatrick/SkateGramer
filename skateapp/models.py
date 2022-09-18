@@ -18,6 +18,11 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    def get_absolute_url(self):
+        return reverse('home')
+    def save(self, *args):
+        super().save()
+
     def __str__(self):
         return self.title
 
