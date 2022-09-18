@@ -113,5 +113,6 @@ def profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
+    
 
     return render(request, 'profile.html', context)

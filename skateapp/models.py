@@ -39,7 +39,7 @@ class Comment(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = CloudinaryField('image')
-    description = models.TextField()
+    description = models.CharField(max_length=400)
 
     def __str__(self):
         return f'{self.user.username} profile'
