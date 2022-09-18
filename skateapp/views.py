@@ -1,11 +1,13 @@
 # All necessary imports for the app views
 
 from django.shortcuts import render, redirect
-from .models import (Post, Comment, Profile, PostTutorial)
+from .models import Post, Comment, Profile, PostTutorial
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
+from .forms import UserRegister, UpdateUserProfile, UserUpadateForm, PostForm
+
 
 # All views used in the app
 
@@ -65,6 +67,8 @@ class PostTutorialListView(ListView):
     context_object_name = 'tutorial'
     ordering = ['-created_on']
 
+
+# allows user to delete posts
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post 
     success_url = '/home'
@@ -76,3 +80,38 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         else:
             return False
+
+# allows creation of user profile
+def register(request):
+    if request.method == 'POST':
+        form = UserRegister(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect('home')
+    else:
+        form = UserRegister()
+    return render(request, 'register.html', {'form': form})
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpadateForm(request.POST, instance=request.user)
+        p_form = UpdateUserProfile(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been Updated')
+            return redirect('profile')
+    else:
+        u_form = UserUpadateForm(instance=request.user)
+        p_form = UpdateUserProfile(instance=request.user.profile)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'profile.html', context)

@@ -43,6 +43,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} profile'
+    
+    def save(self, *args, **kwargs):
+        super().save()
 
 # PostTutorial model responsible for the tutorial post made only by (admin)
 class PostTutorial(models.Model):
