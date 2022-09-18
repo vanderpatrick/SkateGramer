@@ -7,7 +7,7 @@
     <div class="media-body">
       <h2 class="account-heading">{{ user.username }}</h2>
       <p class="text-secondary">{{ user.email }}</p>
-      <p>{{ user.description }}</p>
+      <p class="text-secondary">{{ user.description }}</p>
     </div>
   </div>
   <!-- FORM HERE -->
@@ -17,7 +17,6 @@
       <legend class="border-bottom mb-4">Update Profile</legend>
       {{ u_form|crispy }}
       {{ p_form|crispy }}
-      <textarea name="" id="" cols="30" rows="10"></textarea>
     </fieldset>
     <div class="form-group">
       <button class="btn btn-outline-info" type="submit">Update</button>

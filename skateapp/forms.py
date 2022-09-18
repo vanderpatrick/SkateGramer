@@ -19,7 +19,7 @@ class UserUpadateForm(forms.ModelForm):
 class UpdateUserProfile(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['image','description']
 
 class PostForm(forms.ModelForm):
     class Meta:
