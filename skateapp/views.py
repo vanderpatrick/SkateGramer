@@ -18,3 +18,11 @@ class PostListView(ListView):
     template_name = 'index.html'
     context_object_name = 'posts'
     ordering = ['-created_on']
+
+
+class PostTutorialListView(ListView):
+    model = PostTutorial
+    template_name = 'post_tutorial.html'
+    context_object_name = 'tutorial'
+    ordering = ['-created_on']
+    
