@@ -20,7 +20,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
-    def save(self, *args):
+    def save(self, *args, **kwargs):
         super().save()
 
     def __str__(self):

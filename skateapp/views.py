@@ -20,7 +20,7 @@ class PostListView(ListView):
     ordering = ['-created_on']
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_create.html'
     context_object_name = 'create'
@@ -30,7 +30,28 @@ class PostCreateView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class PostDetailView(DetailView):
+    model = Post
+    context_object_name = 'detail'
+    template_name = 'post_detail.html'
 
+
+class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name = 'post_update.html'
+    context_object_name = "update"
+    fields = ['title', 'image', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
 
 class PostTutorialListView(ListView):
     model = PostTutorial

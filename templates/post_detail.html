@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% load cloudinary %}
+{% block content %}
+<article class="media content-section">
+    <!-- <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" alt=""> -->
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="">{{ detail.author }}</a>
+            <small class="text-muted">{{ detail.created_on}}</small>
+            {% if detail.author == user %}
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-edit' object.id %}">Update</a>
+            {% endif %}
+        </div>
+        <h2 class="article-title">{{object.title}}</h2>
+        <img src="{{ detail.image.url }}" alt="">
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+</article>
+{% endblock content %}
