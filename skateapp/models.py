@@ -13,7 +13,7 @@ from django.utils.timezone import timezone
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
-    image = CloudinaryField('image')
+    image = CloudinaryField('image', eager=[{'width': '400', 'height': '400', 'crop':'crop'}], transformation={'width': '400', 'height': '400', 'crop':'fill', 'radius':'20'})
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
