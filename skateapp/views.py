@@ -67,6 +67,11 @@ class PostTutorialListView(ListView):
     context_object_name = 'tutorial'
     ordering = ['-created_on']
 
+class PostTutorialDetailView(DetailView):
+    model = PostTutorial
+    context_object_name = 'tutorialP'
+    template_name = 'post_tutorial_detail.html'
+
 
 # allows user to delete posts
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

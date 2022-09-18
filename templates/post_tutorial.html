@@ -5,10 +5,10 @@
           <!-- <img class="rounded-circle article-img" src=""> -->
           <div class="media-body post-img">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ t.title }}</a>
+              <a class="mr-2" href="{% url 'tutorial-detail' t.id %}">{{ t.title }}</a>
               <small class="text-muted">{{ t.created_on }}</small>
             </div>
-            <h2><a class="article-title" href="">{{ t.title }}</a></h2>
+            <h2><a class="article-title" href="{% url 'tutorial-detail' t.id %}">{{ t.title }}</a></h2>
             <img  src="{{ t.image.url }}" alt="">
             <p class="article-content">{{ t.description }}</p>
           </div>
