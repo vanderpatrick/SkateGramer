@@ -1,26 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />{% endblock %}
-
-    <!-- {% for t in tutorial %}
-        <article class="media content-section text-center">
-          <img class="rounded-circle article-img" src=""> 
-          <div class="media-body post-img">
-            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'tutorial-detail' t.id %}">{{ t.title }}</a>
-              <small class="text-muted">{{ t.created_on }}</small>
-            </div>
-            <h2><a class="article-title" href="{% url 'tutorial-detail' t.id %}">{{ t.title }}</a></h2>
-            <img  src="{{ t.image.url }}" alt="">
-            <p class="article-content">{{ t.description }}</p>
-          </div>
-        </article>
-    {% endfor %} -->
     {% for t in tutorial %}
-    <container class="container-fluid">
-      <div class="card mb-5">
-        <img src="{{ t.image.url}}" style="height: 550px;" class="card-img-top border border-2 border-bottom-0 rounded" alt="...">
+    <container class="container-fluid p-5">
+      <div class="card mb-5 ">
+        <img src="{{ t.image.url}}"  class="card-img-top img-fluid border border-2 border-bottom-0 rounded" alt="...">
         <div class="card-body mt-3">
           <h5 class="card-title font-change">{{ t.title }}</h5>
           <p class="card-text"> {{ t.description }}</p>
@@ -31,19 +15,3 @@
     </container>
               {% endfor %}
 {% endblock content %}
-
-<!-- <div class="container">
-  <div class="row">
-      <div class="col-lg-12">
-          <div class="card mb-4">
-              <a href="#!"><img class="card-img-top" src="{{ t.image.url  }}" alt="..." /></a>
-              <div class="card-body">
-                  <div class="small text-muted">January 1, 2022</div>
-                  <h2 class="card-title">Featured Post Title</h2>
-                  <p class="card-text">{{ t.description }}</p>
-                  <a class="btn btn-primary" href="{% url 'tutorial-detail' t.id %}">Read more</a>
-              </div>
-          </div>
-      </div>
-  </div>
-</div> -->

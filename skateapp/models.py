@@ -18,6 +18,10 @@ class Post(models.Model):
     content = RichTextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User,related_name='blogpost_like')
+
+    def num_of_likes(self):
+        return self.likes.count()
 
     def get_absolute_url(self):
         return reverse('home')
