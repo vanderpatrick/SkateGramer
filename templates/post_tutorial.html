@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />{% endblock %}
+
     <!-- {% for t in tutorial %}
         <article class="media content-section text-center">
           <img class="rounded-circle article-img" src=""> 
@@ -15,22 +18,32 @@
         </article>
     {% endfor %} -->
     {% for t in tutorial %}
-    <div class="container">
-      <div class="row">
-          <!-- Blog entries-->
-          <div class="col-lg-12">
-              <!-- Featured blog post-->
-              <div class="card mb-4">
-                  <a href="#!"><img class="card-img-top" src="{{ t.image.url  }}" alt="..." /></a>
-                  <div class="card-body">
-                      <div class="small text-muted">January 1, 2022</div>
-                      <h2 class="card-title">Featured Post Title</h2>
-                      <p class="card-text">{{ t.description }}</p>
-                      <a class="btn btn-primary" href="{% url 'tutorial-detail' t.id %}">Read more</a>
-                  </div>
+    <container class="container-fluid">
+      <div class="card mb-5">
+        <img src="{{ t.image.url}}" style="height: 550px;" class="card-img-top border border-2 border-bottom-0 rounded" alt="...">
+        <div class="card-body mt-3">
+          <h5 class="card-title font-change">{{ t.title }}</h5>
+          <p class="card-text"> {{ t.description }}</p>
+          <a href="{% url 'tutorial-detail' t.id%}" class="btn btn-secondary mb-2">Read more</a>
+          <p class="card-text"><small class="text-muted">Made in: {{ t.created_on }}</small></p>
+        </div>
+      </div>
+    </container>
+              {% endfor %}
+{% endblock content %}
+
+<!-- <div class="container">
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="card mb-4">
+              <a href="#!"><img class="card-img-top" src="{{ t.image.url  }}" alt="..." /></a>
+              <div class="card-body">
+                  <div class="small text-muted">January 1, 2022</div>
+                  <h2 class="card-title">Featured Post Title</h2>
+                  <p class="card-text">{{ t.description }}</p>
+                  <a class="btn btn-primary" href="{% url 'tutorial-detail' t.id %}">Read more</a>
               </div>
           </div>
       </div>
   </div>
-              {% endfor %}
-{% endblock content %}
+</div> -->

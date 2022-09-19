@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from .forms import UserRegister, UpdateUserProfile, UserUpadateForm, PostForm
+from ckeditor.fields import RichTextField
+
 
 
 # All views used in the app
@@ -26,6 +28,7 @@ class PostListView(ListView):
 
 # Creates a new post in the app if user is True
 class PostCreateView(LoginRequiredMixin, CreateView):
+    content = RichTextField()
     model = Post
     template_name = 'post_create.html'
     context_object_name = 'create'

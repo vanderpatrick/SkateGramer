@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
 from django.utils.timezone import timezone
+from ckeditor.fields import RichTextField
 
 
 # All app models.
@@ -14,7 +15,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
     image = CloudinaryField('image', eager=[{'width': '400', 'height': '400', 'crop':'crop'}], transformation={'width': '400', 'height': '400', 'crop':'fill', 'radius':'20'})
-    content = models.TextField()
+    content = RichTextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -39,7 +40,10 @@ class Comment(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = CloudinaryField('image')
-    description = models.CharField(max_length=400)
+    description = RichTextField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+    # description = models.TextField(max_length=300)
+    
 
     def __str__(self):
         return f'{self.user.username} profile'

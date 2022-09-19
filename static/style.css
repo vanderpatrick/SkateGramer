@@ -1,11 +1,13 @@
 body {
     background: #fafafa;
     color: #333333;
-    margin-top: 5rem;
+    margin-top: 1rem;
   }
-  
+ 
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
+    font-family: 'Aref Ruqaa Ink', serif;
+
   }
   
   ul {
@@ -73,8 +75,8 @@ body {
   }
   
   .account-img {
-    height: 4022220px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     margin-right: 20px;
     margin-bottom: 16px;
   }

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'cloudinary',
     'skateapp',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 
 LOGIN_URL = 'login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
