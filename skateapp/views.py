@@ -24,14 +24,10 @@ class PostListView(ListView):
     template_name = 'index.html'
     context_object_name = 'posts'
     ordering = ['-created_on']
-    paginate_by = 6
+    paginate_by = 4
 
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(PostListView, self).get_context_data(**kwargs)
-        context['comment'] = [comment_t['content'] for comment_t in Comment.objects.values()]
-        return context
+    
 
 
 # Creates a new post in the app if user is True
